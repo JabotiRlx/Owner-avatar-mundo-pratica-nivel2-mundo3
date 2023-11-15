@@ -49,6 +49,8 @@ AS INT
 START WITH 1
 INCREMENT BY 1;
 
+  DECLARE @NextValue INT = NEXT VALUE FOR LOJA_SEQUENCE
+
   INSERT INTO [dbo].[Pessoa]
            (idPessoa
 		   ,nome
@@ -59,7 +61,7 @@ INCREMENT BY 1;
            ,[email])
      VALUES
            (
-		   NEXT VALUE FOR LOJA_SEQUENCE
+		   @NextValue
 		   ,'Joao'
            ,'Rua 12, Casa 3,Quitanda'
            ,'Riacho do Sul'
@@ -67,28 +69,40 @@ INCREMENT BY 1;
            ,'1111-1111'
            ,'joao@riacho.com'
 		   )
-		   ,(NEXT VALUE FOR LOJA_SEQUENCE
+
+	INSERT INTO [dbo].[PessoaFisica]
+           ([Pessoa_idPessoa]
+           ,[CPF])
+     VALUES
+           (@NextValue
+           ,111111111)	
+
+SET @NextValue = NEXT VALUE FOR LOJA_SEQUENCE
+  INSERT INTO [dbo].[Pessoa]
+           (idPessoa
+		   ,nome
+           ,[logradouro]
+           ,[cidade]
+           ,[estado]
+           ,[telefone]
+           ,[email])
+     VALUES
+           (
+		   (@NextValue
 		   ,'JJC'
 		   ,'Rua 11, Centro'
 		   ,'Riacho do Norte'
 		   ,'PA'
 		   ,'1212-1212'
 		   ,'jjc@riacho.com' )
-
-INSERT INTO [dbo].[PessoaFisica]
-           ([Pessoa_idPessoa]
-           ,[CPF])
-     VALUES
-           (1
-           ,111111111)	
-		
-
+		   	
 INSERT INTO [dbo].[PessoaJuridica]
            ([Pessoa_idPessoa]
            ,[CNPJ])
      VALUES
-           ( 2
+           ( @NextValue
 		   , 22222222222222)
+
 
 
 INSERT INTO [dbo].[Produto]
