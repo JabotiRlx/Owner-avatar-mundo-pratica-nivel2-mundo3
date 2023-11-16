@@ -35,13 +35,13 @@ CREATE TABLE Movimento (
 
 CREATE TABLE PessoaFisica (
   Pessoa_idPessoa INTEGER FOREIGN KEY REFERENCES Pessoa(idPessoa)  ,
-  CPF INTEGER NULL    ,
+  CPF VARCHAR(30) NULL    ,
 );
 
 
 CREATE TABLE PessoaJuridica (
   Pessoa_idPessoa INTEGER FOREIGN KEY REFERENCES Pessoa(idPessoa)  ,
-  CNPJ BigInt NULL    ,
+  CNPJ VARCHAR(30) NULL    ,
 );
 
 CREATE SEQUENCE LOJA_SEQUENCE
